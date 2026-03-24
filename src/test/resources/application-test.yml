@@ -1,0 +1,21 @@
+spring:
+  data:
+    redis:
+      host: localhost
+      port: 6379
+
+app:
+  config:
+    ssm-prefix: /config/spring-remote-config/
+    redis-channel: config:refresh:spring-remote-config
+    fallback-to-local: true
+    debounce-window-ms: 500
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh, health, metrics
+  endpoint:
+    health:
+      show-details: always

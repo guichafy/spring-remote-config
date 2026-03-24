@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: spring-remote-config
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      ssl:
+        enabled: ${REDIS_SSL_ENABLED:false}
+
+app:
+  config:
+    ssm-prefix: /config/${spring.application.name}/
+    redis-channel: config:refresh:${spring.application.name}
+    fallback-to-local: true
+    debounce-window-ms: 2000
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh, health
+  endpoint:
+    health:
+      show-details: always
